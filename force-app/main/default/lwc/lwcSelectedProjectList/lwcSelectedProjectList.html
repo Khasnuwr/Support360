@@ -1,0 +1,50 @@
+<!--
+  @description       : lwcSelectedProjectList.html is a file that contains the HTML code for the lwcSelectedProjectList component.
+  @author            : Arif Mahmud
+  @group             : 
+  @last modified on  : 02-13-2025
+  @last modified by  : Arif Mahmud
+-->
+
+<template>
+    <lightning-card title="Change Manager">
+        <div class="slds-p-around_medium">
+            <p>You’ve selected {projects.length} records.</p>
+
+            <!-- Message Part here -->
+            <template if:true={message}>
+                <p class="message-box">{message}</p>
+            </template>
+            <template if:true={projects.length} >
+                <!-- Search & Select Input -->
+                <div class="custom-dropdown">
+                    <lightning-input 
+                        type="text" 
+                        label="Select New Owner" 
+                        placeholder="Search Users..." 
+                        value={searchKey} 
+                        onfocus={handleFocus}
+                        oninput={handleSearchInput}
+                        onchange={handleSearchInput}>
+                    </lightning-input>
+                    
+                    <!-- Custom Dropdown List -->
+                    <ul if:true={showDropdown} class="dropdown-list">
+                        <template for:each={filteredUsers} for:item="user">
+                            <li key={user.value} data-id={user.value} onclick={handleUserSelect} class="dropdown-item">
+                                {user.label}
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+
+                <lightning-input type="checkbox" label="Send notification email" onchange={handleEmailChange}></lightning-input>
+
+                <div class="slds-m-top_medium">
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button variant="brand" label="Submit" onclick={handleSubmit} class="slds-m-left_small"></lightning-button>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

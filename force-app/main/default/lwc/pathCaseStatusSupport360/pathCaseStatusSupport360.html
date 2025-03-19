@@ -1,0 +1,67 @@
+<!--
+  @description       : 
+  @author            : Arif Mahmud
+  @group             : 
+  @last modified on  : 02-07-2025
+  @last modified by  : Arif Mahmud
+-->
+<template>
+    <lightning-card variant="Narrow">
+        <lightning-spinner alternative-text="Loading" size="small" if:true={isLoading}></lightning-spinner>
+        <!-- Display the button on the top -->
+        <p slot="actions" if:true={isTop}>
+            <lightning-button if:true={showButton} variant="brand" label={buttonLabel} title={buttonLabel} onclick={handleClick}></lightning-button>
+        </p>
+        <div class="slds-m-around_small" if:true={isTop}>
+            <lightning-progress-indicator current-step={currentValue} type={pathType} has-error="false" variant="shaded">
+                <template if:true={pathValues} for:each={pathValues} for:item="step" for:index="index">
+                    <lightning-progress-step data-index={index} data-value={step.value}
+                        onclick={handleSelectChange} key={step.value} label={step.label}
+                        value={step.value}>
+                    </lightning-progress-step>
+                </template>
+            </lightning-progress-indicator>
+        </div>
+        <!-- Display the button in the same row -->
+        <lightning-layout multiple-rows if:false={isTop}>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6" large-device-size="10">
+                <lightning-progress-indicator current-step={currentValue} type={pathType} has-error="true" variant="base">
+                    <template if:true={pathValues} for:each={pathValues} for:item="step" for:index="index">
+                        <lightning-progress-step data-index={index} data-value={step.value}
+                            onchange={handleSelectChange} onclick={handleSelectChange}
+                            onselect={handleSelectChange} key={step.value} label={step.label}
+                            value={step.value}>
+                        </lightning-progress-step>
+                    </template>
+                </lightning-progress-indicator>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="2" medium-device-size="2" large-device-size="2">
+                <lightning-button if:true={showButton} variant="brand" label={buttonLabel} title={buttonLabel} onclick={handleClick}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <!-- Modal for Resolution Input -->
+        <template if:true={showModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Resolution</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <textarea placeholder="Write down your resolution 😊" class="slds-textarea" label="Resolution" value={resolution} onchange={handleResolutionChange}></textarea>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Submit" variant="brand" onclick={handleSubmit}></lightning-button>
+                        <lightning-button label="Cancel" class="slds-m-left_x-small" variant="neutral" onclick={closeModal}></lightning-button>
+                        
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

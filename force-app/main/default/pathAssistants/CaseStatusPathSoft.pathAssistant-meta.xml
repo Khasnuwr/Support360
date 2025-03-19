@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Case</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>CaseStatusPathSoft</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Resolution__c</fieldNames>
+        <info>&lt;p&gt;Fill up the Resolution Description to Complete&lt;/p&gt;</info>
+        <picklistValueName>Done</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>DevelopmentTasks</recordTypeName>
+</PathAssistant>

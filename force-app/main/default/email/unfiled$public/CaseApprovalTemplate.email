@@ -1,0 +1,20 @@
+Hello {!Case.OwnerFirstName},
+
+There is a new approval request waiting for your review:
+
+- Case Number: {!Case.CaseNumber}
+- Submitted By: {!User.Name}
+- Priority: {!Case.Priority}
+- Status: {!Case.Status}
+- Description: {!Case.Description}
+
+Please review the request at your earliest convenience.
+
+To approve, reply YES to this email with 'APPROVE'.
+To reject, reply NO to this email with 'REJECT'.
+
+For more details, view the case here:
+{!Case.Link}
+
+BR,
+Support 360
